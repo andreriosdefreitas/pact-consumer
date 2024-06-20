@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: consumer
+client:
+  provider:
+    url:
