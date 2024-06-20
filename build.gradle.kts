@@ -3,6 +3,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("jvm") version "1.9.24"
 	kotlin("plugin.spring") version "1.9.24"
+	id("au.com.dius.pact") version "4.6.9"
 }
 
 group = "com.example"
@@ -28,6 +29,7 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("au.com.dius.pact.consumer:junit5:4.6.9")
 }
 
 kotlin {
@@ -38,4 +40,13 @@ kotlin {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+pact {
+	broker {
+		pactBrokerUrl = "http://localhost:9292/"
+	}
+	publish {
+		pactBrokerUrl = "http://localhost:9292/"
+	}
 }
