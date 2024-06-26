@@ -20,4 +20,4 @@ jobs:
 
       - name: Run tests
         run: |
-          ./gradlew -g $PWD clean check --no-daemon --no-build-cache --info
+          ./gradlew build
