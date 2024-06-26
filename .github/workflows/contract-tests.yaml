@@ -19,5 +19,5 @@ jobs:
           cache: 'gradle'
 
       - name: Run tests
-          run: |
-            ./gradlew -g $PWD clean check --no-daemon --no-build-cache --info
+        run: |
+          ./gradlew -g $PWD clean check --no-daemon --no-build-cache --info
