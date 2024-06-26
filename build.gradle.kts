@@ -1,3 +1,5 @@
+import java.io.ByteArrayOutputStream
+
 plugins {
 	id("org.springframework.boot") version "3.2.6"
 	id("io.spring.dependency-management") version "1.1.5"
@@ -48,5 +50,15 @@ pact {
 	}
 	publish {
 		pactBrokerUrl = "http://localhost:9292/"
+		consumerVersion = getGitHash()
 	}
+}
+
+fun getGitHash(): String {
+	val stdout = ByteArrayOutputStream()
+	exec {
+		commandLine = listOf("git", "rev-parse", "--short", "HEAD")
+		standardOutput = stdout
+	}
+	return stdout.toString().trim()
 }
