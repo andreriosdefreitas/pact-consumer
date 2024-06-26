@@ -1,0 +1,23 @@
+name: Contract tests' validation and publish
+
+on:
+  push:
+    branches:
+      - main
+      - master
+jobs:
+  test:
+    runs-on: [self-hosted]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Run tests
+          run: |
+            ./gradlew -g $PWD clean check --no-daemon --no-build-cache --info
