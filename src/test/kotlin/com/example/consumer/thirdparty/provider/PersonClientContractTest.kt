@@ -25,11 +25,11 @@ import kotlin.test.assertEquals
 @PactTestFor(providerName = "provider-api", port = "8888")
 @SpringBootTest(classes = [ConsumerApplication::class], properties = ["client.provider.url: localhost:8888"])
 @PactConsumerTest
-class PersonControllerContractTest(@Autowired private val objectMapper: ObjectMapper,
-                                   @Autowired private val providerClient: ProviderClient) {
+class PersonClientContractTest(@Autowired private val objectMapper: ObjectMapper,
+                               @Autowired private val providerClient: ProviderClient) {
 
-    private val personId = "13bb5352-303a-485e-a75b-6b1a97727cde"
-    private val firstName = "First"
+    private val personId = "23bb5352-303a-485e-a75b-6b1a97727cde"
+    private val firstName = "FirstA"
     private val lastName = "Last"
     private val email = "Email"
     private val personRequest = CreatePersonRequest(firstName, lastName, email)
