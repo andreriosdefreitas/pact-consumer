@@ -28,8 +28,8 @@ import kotlin.test.assertEquals
 class PersonClientContractTest(@Autowired private val objectMapper: ObjectMapper,
                                @Autowired private val providerClient: ProviderClient) {
 
-    private val personId = "23bb5352-303a-485e-a75b-6b1a97727cde"
-    private val firstName = "FirstA"
+    private val personId = "13bb5352-303a-485e-a75b-6b1a97727cde"
+    private val firstName = "First"
     private val lastName = "Last"
     private val email = "Email"
     private val personRequest = CreatePersonRequest(firstName, lastName, email)

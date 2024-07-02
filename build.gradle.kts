@@ -51,6 +51,7 @@ pact {
 	publish {
 		pactBrokerUrl = "http://localhost:9292/"
 		consumerVersion = getGitHash()
+		consumerBranch = getGitBranch()
 	}
 }
 
@@ -58,6 +59,15 @@ fun getGitHash(): String {
 	val stdout = ByteArrayOutputStream()
 	exec {
 		commandLine = listOf("git", "rev-parse", "--short", "HEAD")
+		standardOutput = stdout
+	}
+	return stdout.toString().trim()
+}
+
+fun getGitBranch(): String {
+	val stdout = ByteArrayOutputStream()
+	exec {
+		commandLine = listOf("git", "rev-parse", "--abbrev-ref", "HEAD")
 		standardOutput = stdout
 	}
 	return stdout.toString().trim()
