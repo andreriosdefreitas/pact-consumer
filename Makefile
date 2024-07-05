@@ -44,9 +44,9 @@ fake_ci: .env
 	API_BASE_URL=http://localhost:8080 \
 	make ci
 
-publish_pacts: .env
-	@echo "\n========== STAGE: publish pacts ==========\n"
-	@"${PACT_CLI}" publish ${PWD}/pacts --consumer-client ${GIT_COMMIT} --branch ${GIT_BRANCH}
+# publish_pacts: .env
+# 	@echo "\n========== STAGE: publish pacts ==========\n"
+# 	@"${PACT_CLI}" publish ${PWD}/build/pacts --consumer-app-version ${GIT_COMMIT} --branch ${GIT_BRANCH}
 
 ## =====================
 ## Build/test tasks
@@ -54,7 +54,8 @@ publish_pacts: .env
 
 test: .env
 	@echo "\n========== STAGE: test (pact) ==========\n"
-	./gradlew test
+	./gradlew build
+	./gradlew pactPublish
 
 ## =====================
 ## Deploy tasks
@@ -123,10 +124,3 @@ test_github_webhook:
 
 .env:
 	touch .env
-
-output:
-	mkdir -p ./pacts
-	touch ./pacts/tmp
-
-clean: output
-	rm pacts/*
