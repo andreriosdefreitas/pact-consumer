@@ -55,7 +55,15 @@ fake_ci: .env
 test: .env
 	@echo "\n========== STAGE: test (pact) ==========\n"
 	./gradlew build
+	@echo "\n========== STAGE: pactPublish  ==========\n"
 	./gradlew pactPublish
+	@echo "\n========== STAGE: can-i-deploy? ==========\n"
+	./gradlew camIDeploy \
+        --pacticipant ${PACTICIPANT} \
+        --version ${GIT_COMMIT} \
+        --to-environment ${ENVIRONMENT} \
+        --retry-while-unknown 30 \
+        --retry-interval 10
 
 ## =====================
 ## Deploy tasks
