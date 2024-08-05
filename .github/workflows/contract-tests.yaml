@@ -29,6 +29,7 @@ jobs:
       - name: Run tests
         env:
           PACT_PROVIDER: ${{ env.PACT_PROVIDER }}
+          PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
         run: make test
 
 #      - name: Publish pacts between consumer and ${{ env.PACT_PROVIDER }}
