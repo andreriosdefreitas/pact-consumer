@@ -7,9 +7,9 @@ on:
       - master
 
 env:
-  PACT_BROKER_BASE_URL: http://localhost:9292
+  PACT_BROKER_BASE_URL: ${{ env.PACT_BROKER_URL }}
   PACT_PROVIDER: provider-api
-  #PACT_BROKER_TOKEN: ${{ secrets.PACTFLOW_TOKEN_FOR_CI_CD_WORKSHOP }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
   GIT_REF: ${{ github.ref }}
 
