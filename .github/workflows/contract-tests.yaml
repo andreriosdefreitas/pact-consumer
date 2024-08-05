@@ -7,7 +7,7 @@ on:
       - master
 
 env:
-  PACT_BROKER_URL: ${{ PACT_BROKER_URL }}
+  PACT_BROKER_URL: ${{ env.PACT_BROKER_URL }}
   PACT_PROVIDER: provider-api
   PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   GIT_COMMIT: ${{ github.sha }}
