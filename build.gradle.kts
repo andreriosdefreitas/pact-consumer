@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.js.translate.context.Namer.kotlin
 import java.io.ByteArrayOutputStream
 
 plugins {
@@ -46,7 +47,8 @@ tasks.withType<Test> {
 
 pact {
 	broker {
-		pactBrokerUrl = "http://localhost:9292/"
+		pactBrokerUrl = System.getenv("PACT_BROKER_URL")
+		pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
 	}
 	publish {
 		pactBrokerUrl = "http://localhost:9292/"
