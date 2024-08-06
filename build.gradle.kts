@@ -51,7 +51,7 @@ pact {
 		pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
 	}
 	publish {
-		pactBrokerUrl = "http://localhost:9292/"
+		pactBrokerUrl = System.getenv("PACT_BROKER_URL")
 		consumerVersion = getGitHash()
 		consumerBranch = getGitBranch()
 	}
