@@ -11,7 +11,7 @@ GITHUB_WEBHOOK_UUID := "5076f253-8193-4ccd-8304-e99a9a76a0ab"
 PACT_BROKER_URL := ${PACT_BROKER_URL}
 PACT_BROKER_TOKEN:= ${PACT_BROKER_TOKEN}
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
-GIT_COMMIT?=$(shell git rev-parse --short HEAD)
+VERSION?=$(shell git rev-parse --short HEAD)
 GIT_BRANCH?=$(shell git rev-parse --abbrev-ref HEAD)
 ENVIRONMENT?=Staging
 
@@ -46,7 +46,7 @@ fake_ci: .env
 
 # publish_pacts: .env
 # 	@echo "\n========== STAGE: publish pacts ==========\n"
-# 	@"${PACT_CLI}" publish ${PWD}/build/pacts --consumer-app-version ${GIT_COMMIT} --branch ${GIT_BRANCH}
+# 	@"${PACT_CLI}" publish ${PWD}/build/pacts --consumer-app-version ${VERSION} --branch ${GIT_BRANCH}
 
 ## =====================
 ## Build/test tasks
@@ -75,7 +75,7 @@ can_i_deploy: .env
 	@echo "\n========== STAGE: can-i-deploy? ==========\n"
 	@"${PACT_CLI}" broker can-i-deploy \
 	  --pacticipant ${PACTICIPANT} \
-	  --version ${GIT_COMMIT} \
+	  --version ${VERSION} \
 	  --to-environment ${ENVIRONMENT} \
 	  --retry-while-unknown 30 \
 	  --retry-interval 10
