@@ -78,7 +78,8 @@ can_i_deploy: .env
 	  --version ${VERSION} \
 	  --to-environment ${ENVIRONMENT} \
 	  --retry-while-unknown 30 \
-	  --retry-interval 10
+	  --retry-interval 10 \
+	  --broker-base-url ${PACT_BROKER_URL}
 
 deploy_app:
 	@echo "\n========== STAGE: deploy ==========\n"
