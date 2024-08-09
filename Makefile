@@ -8,16 +8,16 @@
 GITHUB_ORG="andreriosdefreitas"
 PACTICIPANT="consumer-client"
 GITHUB_WEBHOOK_UUID := "5076f253-8193-4ccd-8304-e99a9a76a0ab"
-PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_BASE_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
-
-.EXPORT_ALL_VARIABLES:
-GIT_COMMIT?=$(shell git rev-parse HEAD)
+PACT_BROKER_URL := ${PACT_BROKER_URL}
+PACT_BROKER_TOKEN:= ${PACT_BROKER_TOKEN}
+PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
+GIT_COMMIT?=$(shell git rev-parse --short HEAD)
 GIT_BRANCH?=$(shell git rev-parse --abbrev-ref HEAD)
-ENVIRONMENT?=production
+ENVIRONMENT?=Staging
 
 # Only deploy from master (to production env) or test (to test env)
 ifeq ($(GIT_BRANCH),main)
-	ENVIRONMENT=production
+	ENVIRONMENT=Staging
 	DEPLOY_TARGET=deploy
 else
 	ifeq ($(GIT_BRANCH),test)
@@ -57,13 +57,7 @@ test: .env
 	./gradlew build
 	@echo "\n========== STAGE: pactPublish  ==========\n"
 	./gradlew pactPublish
-	@echo "\n========== STAGE: can-i-deploy? ==========\n"
-	./gradlew camIDeploy \
-        --pacticipant ${PACTICIPANT} \
-        --version ${GIT_COMMIT} \
-        --to-environment ${ENVIRONMENT} \
-        --retry-while-unknown 30 \
-        --retry-interval 10
+
 
 ## =====================
 ## Deploy tasks
@@ -91,7 +85,7 @@ deploy_app:
 	@echo "Deploying to ${ENVIRONMENT}"
 
 record_deployment: .env
-	@"${PACT_CLI}" broker record-deployment --pacticipant ${PACTICIPANT} --version ${GIT_COMMIT} --environment ${ENVIRONMENT}
+	@"${PACT_CLI}" broker record_deployment --pacticipant ${PACTICIPANT} --version ${VERSION} --environment ${ENVIRONMENT} --broker-base-url ${PACT_BROKER_URL}
 
 ## =====================
 ## PactFlow set up tasks
