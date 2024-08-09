@@ -30,7 +30,7 @@ jobs:
         env:
           PACT_PROVIDER: ${{ env.PACT_PROVIDER }}
           PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-        run: make test record_deployment
+        run: make test record_deployment can_i_deploy
 
 #      - name: Publish pacts between consumer and ${{ env.PACT_PROVIDER }}
 #        run: GIT_BRANCH=${GIT_REF:11} make publish_pacts
