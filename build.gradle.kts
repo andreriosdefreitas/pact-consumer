@@ -6,7 +6,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("jvm") version "1.9.24"
 	kotlin("plugin.spring") version "1.9.24"
-	id("au.com.dius.pact") version "4.6.10"
+	id("au.com.dius.pact") version "4.6.17"
 }
 
 group = "com.example"
@@ -52,6 +52,7 @@ pact {
 	}
 	publish {
 		pactBrokerUrl = System.getenv("PACT_BROKER_URL")
+		pactBrokerToken = System.getenv("PACT_BROKER_TOKEN")
 		consumerVersion = getGitHash()
 		consumerBranch = getGitBranch()
 	}
