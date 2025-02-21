@@ -13,11 +13,11 @@ PACT_BROKER_TOKEN:= ${PACT_BROKER_TOKEN}
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
 VERSION?=$(shell git rev-parse --short HEAD)
 GIT_BRANCH?=$(shell git rev-parse --abbrev-ref HEAD)
-ENVIRONMENT?=Staging
+ENVIRONMENT?=test
 
 # Only deploy from master (to production env) or test (to test env)
 ifeq ($(GIT_BRANCH),main)
-	ENVIRONMENT=Staging
+	ENVIRONMENT=test
 	DEPLOY_TARGET=deploy
 else
 	ifeq ($(GIT_BRANCH),test)
