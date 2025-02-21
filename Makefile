@@ -8,7 +8,7 @@
 GITHUB_ORG="andreriosdefreitas"
 PACTICIPANT="consumer-client"
 GITHUB_WEBHOOK_UUID := "5076f253-8193-4ccd-8304-e99a9a76a0ab"
-PACT_BROKER_URL := ${PACT_BROKER_URL}
+PACT_BROKER_URL := https://wellhub-84f2ecdb.pactflow.io/
 PACT_BROKER_TOKEN:= ${PACT_BROKER_TOKEN}
 PACT_CLI="docker run --rm -v ${PWD}:${PWD} -e PACT_BROKER_URL -e PACT_BROKER_TOKEN pactfoundation/pact-cli"
 VERSION?=$(shell git rev-parse --short HEAD)
